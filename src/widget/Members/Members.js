@@ -161,102 +161,102 @@ define(function(require, exports, module) {
     Members.prototype.MEMBERS = [
         {
             "name":"Bon",
-            "description": ['good', 'fat']
+            "description": []
         },
         {
             "name":"Yin",
-            "description": ['angle', 'pretty']
+            "description": []
         },{
             "name":"Amy",
-            "description": ['good', 'fat']
+            "description": []
         },
         {
             "name":"Andy",
-            "description": ['angle', 'pretty']
+            "description": ['面惡心善']
         },{
             "name":"AK",
-            "description": ['good', 'fat']
+            "description": ['女神']
         },
         {
             "name":"Aries",
-            "description": ['angle', 'pretty']
+            "description": ['半個宅男']
         },{
             "name":"Berber",
-            "description": ['good', 'fat']
+            "description": ['智囊']
         },
         {
             "name":"Christy",
-            "description": ['angle', 'pretty']
+            "description": ['兵']
         },{
             "name":"Eddie",
-            "description": ['good', 'fat']
+            "description": ['扮哂chok']
         },
         {
             "name":"Hana",
-            "description": ['angle', 'pretty']
+            "description": []
         },{
             "name":"Janice",
-            "description": ['good', 'fat']
+            "description": []
         },
         {
             "name":"Jeremy",
-            "description": ['angle', 'pretty']
+            "description": []
         },{
             "name":"Kai",
-            "description": ['good', 'fat']
+            "description": []
         },
         {
             "name":"Kathy",
-            "description": ['angle', 'pretty']
+            "description": []
         },{
             "name":"Kevin",
-            "description": ['good', 'fat']
+            "description": ['搞事二人組之一']
         },
         {
             "name":"Maggie",
-            "description": ['angle', 'pretty']
+            "description": []
         },{
             "name":"Melanie",
-            "description": ['good', 'fat']
+            "description": ['溫柔']
         },
         {
             "name":"Melvin",
-            "description": ['angle', 'pretty']
+            "description": ['clorox', '口水多過茶']
         },{
             "name":"Michael",
-            "description": ['good', 'fat']
+            "description": ['灣區古巨基']
         },
         {
             "name":"Newman",
-            "description": ['angle', 'pretty']
+            "description": ['嚴肅']
         },{
             "name":"Philip",
-            "description": ['good', 'fat']
+            "description": []
         },
         {
             "name":"Rex",
-            "description": ['angle', 'pretty']
+            "description": []
         },{
             "name":"Ricci",
-            "description": ['good', 'fat']
+            "description": ['搞事二人組之二']
         },
         {
             "name":"Vincent",
-            "description": ['angle', 'pretty']
+            "description": ['訓教果時好危險']
         },{
             "name":"XiuWen",
-            "description": ['good', 'fat']
+            "description": []
         },
         {
             "name":"Yayu",
-            "description": ['angle', 'pretty']
+            "description": []
         },{
             "name":"Jason",
-            "description": ['good', 'fat']
+            "description": []
         },
         {
             "name":"Angle",
-            "description": ['angle', 'pretty']
+            "description": []
         }
     ];
 

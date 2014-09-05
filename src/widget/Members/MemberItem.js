@@ -177,9 +177,9 @@ define(function(require, exports, module) {
         this.springID2 = this.physicsEngine.attach(this.spring2, this.particle);
         Timer.setTimeout(function(){
             this.physicsEngine.detach(this.springID2);
-//            this.topWallID = this.physicsEngine.attach(this.topWall, this.particle);
             this.particle.setVelocity([Math.random()-0.5,Math.random()-0.5,0]);
-        }.bind(this),1000);
+//            this.topWallID = this.physicsEngine.attach(this.topWall, this.particle);  // if set, an reset item will not collide with the other items.
+        }.bind(this),1300);
         var transition = {
             duration: 600,
             curve: Easing.OutQuad
@@ -206,9 +206,15 @@ define(function(require, exports, module) {
 
     MemberItem.prototype.setContent = function(){
         var content = ['<div class="member-content" style="border-radius: ', AppConstant.iconSize, 'px; font-size:', AppConstant.memberContentSize, 'px">',
-            '<div class="name" style="font-size:', AppConstant.memberContentSize + 3, 'px">', this.model.name, '</div>'];
+            '<div class="name" style="font-size:', AppConstant.memberContentSize + 10, 'px">', this.model.name, '</div>'];
+        var randomDescription = AppConstant.randomWord[Math.floor(Math.random()*AppConstant.randomWord.length)];
+        console.log(randomDescription)
+        if (this.model.description)
+            this.model.description.push(randomDescription);
+        else
+            this.model.description = [randomDescription];
         for (var i in this.model.description){
-            content.push(['<div style="color: hsl(' + (0.6 + i/this.model.description.length*0.2) * 360 + ',100%,88%)">',
+            content.push(['<div class="description" style="color: hsl(' + (0.6 + i/this.model.description.length*0.2) * 360 + ',100%,88%); font-size:', AppConstant.memberContentSize + 10, 'px">',
                 this.model.description[i],
                 '</div>'].join(''));
         }
@@ -248,7 +254,7 @@ define(function(require, exports, module) {
         var ballSpringID = this.physicsEngine.attach(ballSpring, this.particle);
         Timer.setTimeout(function(){
             this.physicsEngine.detach(ballSpringID);
-            this.particle.setVelocity([0,0,0])
+            this.particle.setVelocity([0,0,0]);
         }.bind(this),2000);
     };
 
