@@ -43,21 +43,24 @@ define(function(require, exports, module) {
 
     function _createMemberIcon(){
         this.contentSurf = new Surface({
-            size: [AppConstant.iconSize,AppConstant.iconSize],
+            size: [AppConstant.iconSize*AppConstant.scale,AppConstant.iconSize*AppConstant.scale],
             classes:['see-back'],
             content: this.setContent(),
             properties:{
                 fontSize:'12px',
                 color: 'black',
                 background: '#333',
-                borderRadius: AppConstant.iconSize/2+'px'
+                borderRadius: AppConstant.iconSize/2*AppConstant.scale+'px'
             }
         });
         this.contentSurfMod = new StateModifier({
             transform:Transform.thenMove(Transform.rotateY(Math.PI),[0,0,-0.1])
         });
+        this.contentSurfScaleMod = new StateModifier({
+            transform:Transform.scale(1/AppConstant.scale, 1/AppConstant.scale,1)
+        });
         this.contentNode = new RenderNode();
-        this.contentNode.add(this.contentSurfMod).add(this.contentSurf);
+        this.contentNode.add(this.contentSurfScaleMod).add(this.contentSurfMod).add(this.contentSurf);
         this.contentSurfController = new RenderController();
 
         this.backgroundSurf = new Surface({
@@ -65,21 +68,24 @@ define(function(require, exports, module) {
             classes:['see-back'],
             properties:{
                 background: '#333',
-                borderRadius: AppConstant.iconSize/2+'px'
+                borderRadius: AppConstant.iconSize/2*AppConstant.scale+'px'
             }
         });
         this.backgroundSurfMod = new StateModifier({
             transform:Transform.translate(0,0,-0.05)
         });
         this.icon = new Surface({
-            size: [AppConstant.iconSize,AppConstant.iconSize],
+            size: [AppConstant.iconSize*AppConstant.scale,AppConstant.iconSize*AppConstant.scale],
             classes:['icon'],
             content: this.setIconPic()
+        });
+        this.iconScaleMod = new Modifier({
+            transform:Transform.scale(1/AppConstant.scale, 1/AppConstant.scale,1)
         });
         this.nodee = new RenderNode();
         this.nodee.add(this.contentSurfController);
         this.nodee.add(this.backgroundSurfMod).add(this.backgroundSurf);
-        this.nodee.add(this.icon);
+        this.nodee.add(this.iconScaleMod).add(this.icon);
         this.iconMod = new StateModifier();
         this.iconMod2 = new StateModifier();
         this.iconMod3 = new StateModifier();
@@ -99,10 +105,10 @@ define(function(require, exports, module) {
         });
         this.physicsEngine.addBody(this.particle);
         this.add(this.particle).add(this.iconMod5).add(this.iconMod4).add(this.iconMod3).add(this.iconMod2).add(this.iconMod).add(this.shakeNode);
-        _setBottomWall.call(this);
+        _setBottomAndTopWalls.call(this);
     }
 
-    function _setBottomWall(){
+    function _setBottomAndTopWalls(){
         this.bottomWall = new Wall({
             normal: [0,0,1],
             distance: -1,
@@ -111,6 +117,15 @@ define(function(require, exports, module) {
             onContact: 0
         });
         this.physicsEngine.attach(this.bottomWall, this.particle);
+
+        this.topWall = new Wall({
+            normal: [0,0,-1],
+            distance: 1,
+            restitution: 0,
+            drift: 0,
+            onContact: 0
+        });
+        this.topWallID = this.physicsEngine.attach(this.topWall, this.particle);
     }
 
     function _setupEvents(){
@@ -130,6 +145,10 @@ define(function(require, exports, module) {
     }
 
     MemberItem.prototype.onHit = function(){
+        if (this.topWallID) {
+            this.physicsEngine.detach(this.topWallID);
+            this.topWallID = 0;
+        }
         this.springID1 = this.physicsEngine.attach(this.spring, this.particle);
         var transition = {
             duration: 600,
@@ -158,6 +177,7 @@ define(function(require, exports, module) {
         this.springID2 = this.physicsEngine.attach(this.spring2, this.particle);
         Timer.setTimeout(function(){
             this.physicsEngine.detach(this.springID2);
+//            this.topWallID = this.physicsEngine.attach(this.topWall, this.particle);
             this.particle.setVelocity([Math.random()-0.5,Math.random()-0.5,0]);
         }.bind(this),1000);
         var transition = {
@@ -180,7 +200,7 @@ define(function(require, exports, module) {
     
     MemberItem.prototype.setIconPic = function(){
         return ['<div class="icon">',
-            '<img src="assets/img/', this.model.name, '.jpg" style="border-radius: ', AppConstant.iconSize, 'px">',
+            '<img src="assets/img/', this.model.name, '.jpg" style="border-radius: ', AppConstant.iconSize*AppConstant.scale, 'px">',
             '</div>'].join('')
     };
 

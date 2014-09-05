@@ -19,8 +19,8 @@ define(function(require, exports, module) {
         }
         this.wallDown = setWall([0,-1,0], window.innerHeight - AppConstant.iconSize*2 - AppConstant.headerSize);
         this.wallUp = setWall([0,1,0], 0 + size);
-        this.wallRight = setWall([-1,0,0], window.innerWidth + size);
-        this.wallLeft = setWall([1,0,0], 0 + size);
+        this.wallRight = setWall([-1,0,0], window.innerWidth - AppConstant.iconSize/2);
+        this.wallLeft = setWall([1,0,0], 0 - AppConstant.iconSize/2);
         this.wallBottom = setWall([0,0,1], -1 + size);
 
         this.walls = [this.wallUp,this.wallDown,this.wallLeft,this.wallRight];
