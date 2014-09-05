@@ -207,12 +207,6 @@ define(function(require, exports, module) {
     MemberItem.prototype.setContent = function(){
         var content = ['<div class="member-content" style="border-radius: ', AppConstant.iconSize, 'px; font-size:', AppConstant.memberContentSize, 'px">',
             '<div class="name" style="font-size:', AppConstant.memberContentSize + 10, 'px">', this.model.name, '</div>'];
-        var randomDescription = AppConstant.randomWord[Math.floor(Math.random()*AppConstant.randomWord.length)];
-        console.log(randomDescription)
-        if (this.model.description)
-            this.model.description.push(randomDescription);
-        else
-            this.model.description = [randomDescription];
         for (var i in this.model.description){
             content.push(['<div class="description" style="color: hsl(' + (0.6 + i/this.model.description.length*0.2) * 360 + ',100%,88%); font-size:', AppConstant.memberContentSize + 10, 'px">',
                 this.model.description[i],

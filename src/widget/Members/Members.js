@@ -45,6 +45,7 @@ define(function(require, exports, module) {
 
     function _init(){
         this.members = [];
+        this.randomWord = AppConstant.randomWord;
     }
 
     function _createPhysics(){
@@ -90,6 +91,9 @@ define(function(require, exports, module) {
     }
 
     Members.prototype.addItem = function(model){
+        var randomWordIndex = Math.floor(Math.random()*this.randomWord.length);
+        model.description.push(this.randomWord[randomWordIndex]);
+        this.randomWord.splice(randomWordIndex, 1);
         var item = new MemberItem({
             physicsEngine: this.physicsEngine,
             model: model,
@@ -142,7 +146,6 @@ define(function(require, exports, module) {
         this.ballSync.on('end', function(data) {
             this.ballPos.set(data.position);
             this.finalPos = this.ballPos.get();
-            console.log(this.initPos, this.finalPos)
             var dx = this.finalPos[0]-this.initPos[0];
             var dy = this.finalPos[1]-this.initPos[1];
             var dr = Math.sqrt(dx*dx + dy*dy)*2;
