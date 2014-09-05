@@ -174,7 +174,7 @@ define(function(require, exports, module) {
             "name":"Andy",
             "description": ['angle', 'pretty']
         },{
-            "name":"Angle K",
+            "name":"AK",
             "description": ['good', 'fat']
         },
         {
@@ -255,7 +255,7 @@ define(function(require, exports, module) {
             "description": ['good', 'fat']
         },
         {
-            "name":"Angle W",
+            "name":"Angle",
             "description": ['angle', 'pretty']
         }
     ];
