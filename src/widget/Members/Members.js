@@ -192,7 +192,7 @@ define(function(require, exports, module) {
             "description": ['兵']
         },{
             "name":"Eddie",
-            "description": ['扮哂chok']
+            "description": ['chok', '扮哂chok', '最中意贊自己靚仔', '最中意戴黑超']
         },
         {
             "name":"Hana",
