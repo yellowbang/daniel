@@ -164,7 +164,7 @@ define(function(require, exports, module) {
     Members.prototype.MEMBERS = [
         {
             "name":"Bon",
-            "description": []
+            "description": ['隨緣']
         },
         {
             "name":"Yin",
@@ -178,11 +178,11 @@ define(function(require, exports, module) {
             "description": ['面惡心善']
         },{
             "name":"AK",
-            "description": ['女神']
+            "description": ['女神','收兵']
         },
         {
             "name":"Aries",
-            "description": ['半個宅男']
+            "description": ['半個宅男', '又顧家又賢淑']
         },{
             "name":"Berber",
             "description": ['智囊']
@@ -192,11 +192,11 @@ define(function(require, exports, module) {
             "description": ['兵']
         },{
             "name":"Eddie",
-            "description": ['chok', '扮哂chok', '小氣', '最中意贊自己靚仔', '最中意戴黑超']
+            "description": ['chok', '扮哂chok', '小氣', '最中意贊自己靚仔', '最中意戴黑超', '重口味 ']
         },
         {
             "name":"Hana",
-            "description": ['唔發“爛砸”的時候就好好']
+            "description": ['唔發“爛砸”的時候就好好','漫畫少女']
         },{
             "name":"Janice",
             "description": []
@@ -213,21 +213,21 @@ define(function(require, exports, module) {
             "description": []
         },{
             "name":"Kevin",
-            "description": ['搞事二人組之一']
+            "description": ['搞事二人組之一','維園阿伯']
         },
         {
             "name":"Maggie",
-            "description": []
+            "description": ['童顏']
         },{
             "name":"Melanie",
             "description": ['溫柔']
         },
         {
             "name":"Melvin",
-            "description": ['clorox', '口水多過茶']
+            "description": ['clorox', '口水多過茶', '特別乾淨']
         },{
             "name":"Michael",
-            "description": ['灣區古巨基']
+            "description": ['灣區古巨基', '荀盤']
         },
         {
             "name":"Newman",
@@ -241,7 +241,7 @@ define(function(require, exports, module) {
             "description": []
         },{
             "name":"Ricci",
-            "description": ['搞事二人組之二']
+            "description": ['搞事二人組之二','外星人']
         },
         {
             "name":"Vincent",
