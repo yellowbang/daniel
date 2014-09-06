@@ -196,7 +196,7 @@ define(function(require, exports, module) {
         },
         {
             "name":"Hana",
-            "description": []
+            "description": ['唔發“爛砸”的時候就好好']
         },{
             "name":"Janice",
             "description": []
