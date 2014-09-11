@@ -2,6 +2,8 @@ define(function(require, exports, module) {
     // import dependencies
     var View = require('famous/core/View');
     var Surface = require('famous/core/Surface');
+    var Modifier = require('famous/core/Modifier');
+    var Transform = require('famous/core/Transform');
     var PhysicsEngine = require('famous/physics/PhysicsEngine');
     var Wall = require("famous/physics/constraints/Wall");
     var Drag = require("famous/physics/forces/Drag");
@@ -9,14 +11,15 @@ define(function(require, exports, module) {
     var Spring = require("famous/physics/forces/Spring");
     var VectorField = require("famous/physics/forces/VectorField");
     var Vector = require('famous/math/Vector');
-    var GenericSync         = require('famous/inputs/GenericSync');
-    var TouchSync           = require('famous/inputs/TouchSync');
-    var MouseSync           = require('famous/inputs/MouseSync');
-    var Transitionable      = require('famous/transitions/Transitionable');
+    var GenericSync = require('famous/inputs/GenericSync');
+    var TouchSync = require('famous/inputs/TouchSync');
+    var MouseSync = require('famous/inputs/MouseSync');
+    var Transitionable = require('famous/transitions/Transitionable');
+    var Timer = require('famous/utilities/Timer');
 
     GenericSync.register({
-        mouse : MouseSync,
-        touch : TouchSync
+        mouse: MouseSync,
+        touch: TouchSync
     });
 
     var Walls = require('widget/Members/Walls');
@@ -32,6 +35,7 @@ define(function(require, exports, module) {
         _createPhysics.call(this);
         _setMembers.call(this);
         _setBall.call(this);
+        _setThrowBall.call(this);
         this.setupEvent();
     }
 
@@ -39,11 +43,11 @@ define(function(require, exports, module) {
     Members.prototype.constructor = Members;
 
     Members.DEFAULT_OPTIONS = {
-        size:[200,200]
+        size: [200, 200]
     };
 
 
-    function _init(){
+    function _init() {
         this.members = [];
         this.randomWord = AppConstant.randomWord;
     }
@@ -52,42 +56,51 @@ define(function(require, exports, module) {
         this.physicsEngine = new PhysicsEngine();
         this.walls = new Walls(0, AppConstant.wallRestitution, Wall.ON_CONTACT.REFLECT).walls;
         this.drag = new Drag({
-            strength : AppConstant.dragStrength
+            strength: AppConstant.dragStrength
         });
         this.collision = new Collision({
-            restitution : AppConstant.collisionRestitution,
+            restitution: AppConstant.collisionRestitution,
             drift: 1
         });
         this.collisionBall = new Collision({
-            restitution : 0,
+            restitution: 0,
             slope: 10,
             drift: 1
         });
         this.spring1 = new Spring({
-            dampingRatio : 1,
+            dampingRatio: 1,
             forceFunction: Spring.FORCE_FUNCTIONS.FENE,
             length: 0,
             period: 600,
-            anchor : new Vector(window.innerWidth/2, window.innerHeight/3, 700)
+            anchor: new Vector(window.innerWidth / 2, window.innerHeight / 3, 700)
         });
         this.spring2 = new Spring({
-            dampingRatio : 1,
+            dampingRatio: 1,
             forceFunction: Spring.FORCE_FUNCTIONS.FENE,
             length: 0,
             period: 600,
-            anchor : new Vector(window.innerWidth/2, window.innerHeight/3, 0)
+            anchor: new Vector(window.innerWidth / 2, window.innerHeight / 3, 0)
         });
     }
 
-    function _setMembers(){
-        for (var i in this.MEMBERS){
+    function _setMembers() {
+        for (var i in this.MEMBERS) {
             var member = this.MEMBERS[i];
             this.addItem(member)
         }
     }
 
-    function _setMask(){
-
+    function _setThrowBall() {
+        this.throwBall = new Surface({
+            content: '<div class="throw_ball">Try to throw the ball</div>',
+            size: [true, AppConstant.iconSize]
+        });
+        this.throwBallMod = new Modifier({
+            origin: [0.5, 1],
+            transform: Transform.translate(-140, 0, 10),
+            opacity: 0.5
+        });
+        this.add(this.throwBallMod).add(this.throwBall);
     }
 
     Members.prototype.addItem = function(model){
@@ -136,7 +149,11 @@ define(function(require, exports, module) {
 
         this.ballSync.on('start', function() {
             this.ballPos.set([0,0]);
-            this.initPos = this.ballPos.get()
+            this.initPos = this.ballPos.get();
+            this.throwBallMod.setOpacity(0, {duration:500})
+            Timer.setTimeout(function(){;
+                this.throwBallMod.setOpacity(0.5, {duration:500})
+            }.bind(this),1300);
         }.bind(this));
 
         this.ballSync.on('update', function(data) {

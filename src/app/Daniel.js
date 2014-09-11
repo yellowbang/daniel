@@ -41,6 +41,7 @@ define(function(require, exports, module) {
         this.layout.content.add(this.backgroundMod).add(this.background);
         _setHeader.call(this);
         _setContent.call(this);
+        _setInfo.call(this);
 
     }
 
@@ -103,6 +104,23 @@ define(function(require, exports, module) {
             this.picButtonNodeMod.setTransform(Transform.rotateY(0),{duration:400});
             this.picsController.show(this.members);
         }.bind(this));
+    }
+
+    function _setInfo(){
+        this.address = new Surface({
+            content: '<div class="info" style="font-size: '+AppConstant.iconSize/3+'px">' +
+                '<div class="info"><a target="_blank" href="http://maps.google.com/?q=1150 Vicente Street San Francisco CA">' +
+                '<div style="float: right; color: rgb(248, 186, 43);">1150 Vicente Street</div>' +
+                '<div style="color: rgb(248, 186, 43); font-size: '+ AppConstant.iconSize/3.5 +'px">San Francisco, CA 94116</div>' +
+                '</a></div>' +
+                '<div><a target="_blank" href="http://www.sfcac.org/" style="float: right; color: rgb(236, 159, 42);"> More Info </a></div></div>',
+            size: [true, AppConstant.iconSize]
+        });
+        this.addressMod = new Modifier({
+            origin: [1, 1],
+            transform: Transform.translate(-20, -0.03*window.innerHeight,0)
+        });
+        this.add(this.addressMod).add(this.address);
     }
 
     Daniel.prototype.addHeader = function(word, index){
