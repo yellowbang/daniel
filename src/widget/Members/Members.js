@@ -92,12 +92,12 @@ define(function(require, exports, module) {
 
     function _setThrowBall() {
         this.throwBall = new Surface({
-            content: '<div class="throw_ball">Try to throw the ball</div>',
+            content: '<div class="throw_ball">Drag to throw the ball</div>',
             size: [true, AppConstant.iconSize]
         });
         this.throwBallMod = new Modifier({
             origin: [0.5, 1],
-            transform: Transform.translate(-140, 0, 10),
+            transform: Transform.translate(-200, 0, 10),
             opacity: 0.5
         });
         this.add(this.throwBallMod).add(this.throwBall);
